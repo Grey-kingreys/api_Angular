@@ -1,0 +1,60 @@
+<div class="container mx-auto px-4 py-8">
+    <!-- En-tête -->
+    <div class="mb-8">
+        <h1 class="text-4xl font-bold text-gray-800 mb-2">Pokédex</h1>
+        <p class="text-gray-600">Découvrez tous les pokémons</p>
+    </div>
+
+    <!-- Barre de recherche -->
+    <div class="mb-6">
+        <input type="text" [(ngModel)]="searchTerm" (input)="onSearch()" placeholder="Rechercher un pokémon..."
+            class="w-full md:w-1/2 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
+    </div>
+
+    <!-- Loader -->
+    <div *ngIf="isLoading" class="flex justify-center items-center py-20">
+        <div class="animate-spin rounded-full h-16 w-16 border-t-4 border-blue-500"></div>
+    </div>
+
+    <!-- Grille des pokémons -->
+    <div *ngIf="!isLoading && displayedPokemons.length > 0"
+        class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6 mb-8">
+        <div *ngFor="let pokemon of displayedPokemons" (click)="viewDetails(pokemon)"
+            class="bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow cursor-pointer overflow-hidden">
+
+            <div class="bg-gray-100 p-4 flex justify-center items-center h-40">
+                <img [src]="getPokemonImage(pokemon.url)" [alt]="pokemon.name" class="w-32 h-32 object-contain" />
+            </div>
+
+            <div class="p-4">
+                <p class="text-sm text-gray-500">#{{ getPokemonId(pokemon.url) }}</p>
+                <h3 class="text-lg font-semibold text-gray-800 capitalize">
+                    {{ pokemon.name }}
+                </h3>
+            </div>
+        </div>
+    </div>
+
+    <!-- Message si aucun résultat -->
+    <div *ngIf="!isLoading && displayedPokemons.length === 0" class="text-center py-20">
+        <p class="text-gray-500 text-xl">Aucun pokémon trouvé</p>
+    </div>
+
+    <!-- Pagination -->
+    <div *ngIf="!isLoading && totalPages > 1" class="flex justify-center items-center gap-2">
+
+        <button (click)="goToPage(currentPage - 1)" [disabled]="currentPage === 1"
+            class="px-4 py-2 bg-blue-500 text-white rounded-lg disabled:bg-gray-300 disabled:cursor-not-allowed hover:bg-blue-600 transition">
+            Précédent
+        </button>
+
+        <span class="px-4 py-2 text-gray-700">
+            Page {{ currentPage }} / {{ totalPages }}
+        </span>
+
+        <button (click)="goToPage(currentPage + 1)" [disabled]="currentPage === totalPages"
+            class="px-4 py-2 bg-blue-500 text-white rounded-lg disabled:bg-gray-300 disabled:cursor-not-allowed hover:bg-blue-600 transition">
+            Suivant
+        </button>
+    </div>
+</div>
