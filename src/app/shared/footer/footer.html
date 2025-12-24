@@ -1,30 +1,120 @@
 <!-- footer.component.html -->
-<footer class="bg-gray-800 text-white">
-    <div class="max-w-7xl mx-auto px-4 py-6">
-        <div class="flex flex-col md:flex-row justify-between items-center">
+<footer class="bg-gray-800 text-white flex flex-col min-h-auto">
 
-            <!-- Copyright -->
-            <div class="mb-4 md:mb-0">
-                <p class="text-sm text-gray-400">
-                    © {{ currentYear }} Souleymane Diallo - Projet Angular 19
-                </p>
+    <!-- Contenu principal -->
+    <div class="max-w-7xl mx-auto w-full px-4 py-8 flex-1">
+        <div class="flex flex-col md:flex-row gap-10 justify-between">
+
+            <!-- Contact -->
+            <div class="flex flex-col space-y-3">
+                <h3 class="text-lg font-semibold">Contact</h3>
+
+                <a href="mailto:souleymane@email.com"
+                    class="flex items-center gap-2 text-gray-400 hover:text-white transition">
+                    <!-- Mail icon -->
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M21.75 6.75v10.5A2.25 2.25 0 0119.5 19.5h-15A2.25 2.25 0 012.25 17.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15A2.25 2.25 0 002.25 6.75m19.5 0L12 13.5 2.25 6.75" />
+                    </svg>
+                    Email
+                </a>
+
+                <a href="https://wa.me/224XXXXXXXXX" target="_blank"
+                    class="flex items-center gap-2 text-gray-400 hover:text-white transition">
+                    <!-- Phone icon -->
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M2.25 4.5l3.75-.75 2.25 5.25-2.25 1.5a15.3 15.3 0 007.5 7.5l1.5-2.25 5.25 2.25-.75 3.75A2.25 2.25 0 0119.5 21 17.25 17.25 0 012.25 4.5z" />
+                    </svg>
+                    WhatsApp
+                </a>
+
+                <a href="https://facebook.com/tonprofil" target="_blank"
+                    class="flex items-center gap-2 text-gray-400 hover:text-white transition">
+                    <!-- Users icon -->
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M15 19.128a9.38 9.38 0 002.625.372M4.875 19.5A9.375 9.375 0 0112 3.75a9.375 9.375 0 017.125 15.75M15 11.25a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                    Facebook
+                </a>
             </div>
 
-            <!-- Liens sociaux -->
-            <div class="flex space-x-6">
-                <a href="https://github.com/greykingreys" target="_blank" rel="noopener noreferrer"
-                    class="text-gray-400 hover:text-white transition">
+            <!-- Réseaux sociaux -->
+            <div class="flex flex-col space-y-3">
+                <h3 class="text-lg font-semibold">Réseaux sociaux</h3>
+
+                <a href="https://github.com/greykingreys" target="_blank"
+                    class="flex items-center gap-2 text-gray-400 hover:text-white transition">
+                    <!-- Code icon -->
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M16.5 8.25L21 12l-4.5 3.75M7.5 15.75L3 12l4.5-3.75M14.25 4.5l-4.5 15" />
+                    </svg>
                     GitHub
                 </a>
-                <a href="https://linkedin.com/in/souleymane-gueye" target="_blank" rel="noopener noreferrer"
-                    class="text-gray-400 hover:text-white transition">
+
+                <a href="https://linkedin.com/in/souleymane-gueye" target="_blank"
+                    class="flex items-center gap-2 text-gray-400 hover:text-white transition">
+                    <!-- Briefcase icon -->
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M12 12v7.5M8.25 6.75h7.5M3.75 9h16.5v9.75A2.25 2.25 0 0118 21H6a2.25 2.25 0 01-2.25-2.25V9z" />
+                    </svg>
                     LinkedIn
                 </a>
-                <a href="https://souleymane-gueye.com" target="_blank" rel="noopener noreferrer"
-                    class="text-gray-400 hover:text-white transition">
-                    Portfolio
+
+                <a href="https://x.com/tonprofil" target="_blank"
+                    class="flex items-center gap-2 text-gray-400 hover:text-white transition">
+                    <!-- Chat bubble icon -->
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M7.5 8.25h9m-9 3h6m6 6l-3.75-3.75H6A2.25 2.25 0 013.75 11.25v-6A2.25 2.25 0 016 3h12a2.25 2.25 0 012.25 2.25v9.75z" />
+                    </svg>
+                    X (Twitter)
                 </a>
             </div>
+
+            <!-- Navigation -->
+            <div class="flex flex-col space-y-3">
+                <h3 class="text-lg font-semibold">Navigation</h3>
+
+                <a routerLink="/" class="flex items-center gap-2 text-gray-400 hover:text-white transition">
+                    <!-- Home icon -->
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M2.25 12l9.75-9.75L21.75 12M4.5 10.5V21h6v-6h3v6h6V10.5" />
+                    </svg>
+                    Home
+                </a>
+
+                <a routerLink="/pays" class="flex items-center gap-2 text-gray-400 hover:text-white transition">
+                    <!-- Globe icon -->
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M12 3.75a8.25 8.25 0 100 16.5 8.25 8.25 0 000-16.5z" />
+                    </svg>
+                    Pays
+                </a>
+
+                <a routerLink="/pokemon" class="flex items-center gap-2 text-gray-400 hover:text-white transition">
+                    <!-- Sparkles icon -->
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-2.846-.813l2.846-.813L9 11.25l.813 2.846a4.5 4.5 0 002.846.813l-2.846.813z" />
+                    </svg>
+                    Pokémon
+                </a>
+            </div>
+
         </div>
     </div>
+
+    <!-- Bas du footer -->
+    <div class="border-t border-gray-700 py-4">
+        <p class="text-center text-sm text-gray-400">
+            © {{ currentYear }} Souleymane Diallo
+        </p>
+    </div>
+
 </footer>

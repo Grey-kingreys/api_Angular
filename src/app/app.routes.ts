@@ -5,7 +5,7 @@ import { Pokemon } from './features/pokemon/pokemon';
 
 export const routes: Routes = [
     {
-        path: 'home',
+        path: '',
         component: Home
         
     },
