@@ -1,5 +1,5 @@
 // src/environments/environment.ts
 export const environment = {
     production: true,
-    apiUrl: 'http://localhost:3000'  // Ton backend NestJS
+    apiUrl: 'https://back-api-angular.onrender.com'  // Ton backend NestJS
 };
