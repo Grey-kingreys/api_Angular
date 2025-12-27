@@ -22,16 +22,16 @@ export class Home {
       icon: '🌍',
       title: 'Explorer les Pays',
       description: 'Découvrez tous les pays du monde avec leurs informations détaillées',
-      route: '/countries',
+      route: '/pays',
       color: 'blue',
-      stats: '250+ pays'
+      stats: '250+ pays',
     },
     {
       icon: '⚡',
       title: 'Découvrir les Pokémons',
       description: 'Parcourez 200 Pokémons avec leurs statistiques complètes',
-      route: '/pokemons',
-      color: 'red',
+      route: '/pokemon',
+      color: 'blue',
       stats: '200 pokémons'
     }
   ];
