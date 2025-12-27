@@ -49,8 +49,9 @@
     </div>
 
     <!-- Liste des pays -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        <div *ngFor="let country of filteredCountries" [routerLink]="['/pays', country.cca3]"
+    <div *ngIf="!isLoading && displayedCountry.length > 0"
+    class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <div *ngFor="let country of displayedCountry" [routerLink]="['/pays', country.cca3]"
             class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 cursor-pointer">
             <!-- Drapeau -->
             <div class="h-40 overflow-hidden">
@@ -82,5 +83,23 @@
     <!-- Message si aucun résultat -->
     <div *ngIf="!isLoading && filteredCountries.length === 0" class="text-center py-20">
         <p class="text-gray-500 text-lg">Aucun pays trouvé 😕</p>
+    </div>
+
+    <!-- Pagination -->
+    <div *ngIf="!isLoading && totalPages > 1" class="flex justify-center items-center gap-2">
+    
+        <button (click)="goToPage(currentPage - 1)" [disabled]="currentPage === 1"
+            class="px-4 py-2 bg-blue-500 text-white rounded-lg disabled:bg-gray-300 disabled:cursor-not-allowed hover:bg-blue-600 transition">
+            Précédent
+        </button>
+    
+        <span class="px-4 py-2 text-gray-700">
+            Page {{ currentPage }} / {{ totalPages }}
+        </span>
+    
+        <button (click)="goToPage(currentPage + 1)" [disabled]="currentPage === totalPages"
+            class="px-4 py-2 bg-blue-500 text-white rounded-lg disabled:bg-gray-300 disabled:cursor-not-allowed hover:bg-blue-600 transition">
+            Suivant
+        </button>
     </div>
 </div>

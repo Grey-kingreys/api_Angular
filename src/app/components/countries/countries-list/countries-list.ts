@@ -18,6 +18,12 @@ export class CountriesList implements OnInit {
   isLoading: boolean = false;
   errorMessage: string = '';
 
+  displayedCountry: Country[] = [];
+
+  currentPage: number = 1;
+  itemsPerPage: number = 20;
+  totalPages: number = 0;
+
   regions = ['Africa', 'Americas', 'Asia', 'Europe', 'Oceania'];
 
   constructor(private countryService: CountryService) { }
@@ -32,6 +38,7 @@ export class CountriesList implements OnInit {
       next: (data) => {
         this.countries = data;
         this.filteredCountries = data;
+        this.updatePagination();
         this.isLoading = false;
       },
       error: (error) => {
@@ -60,6 +67,23 @@ export class CountriesList implements OnInit {
       const matchesRegion = this.selectedRegion === 'all' || country.region === this.selectedRegion;
       return matchesSearch && matchesRegion;
     });
+
+    this.currentPage = 1;
+    this.updatePagination();
+  }
+
+  updatePagination(): void {
+    this.totalPages = Math.ceil(this.filteredCountries.length / this.itemsPerPage);
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    const endIndex = startIndex + this.itemsPerPage;
+    this.displayedCountry = this.filteredCountries.slice(startIndex, endIndex);
+  }
+
+  goToPage(page: number): void {
+    if (page >= 1 && page <= this.totalPages) {
+      this.currentPage = page;
+      this.updatePagination();
+    }
   }
 
   formatPopulation(pop: number): string {
