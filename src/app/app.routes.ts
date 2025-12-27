@@ -1,8 +1,9 @@
 import { Routes } from '@angular/router';
-import { Home } from './features/home/home';
-import { Pays } from './features/pays/pays';
-import { PokemonList } from './components/pokemon-list/pokemon-list';
-import { PokemonDetail } from './components/pokemon-detail/pokemon-detail';
+import { Home } from './components/home/home';
+import { CountriesList } from './components/countries/countries-list/countries-list';
+import { CountryDetails } from './components/countries/countries-details/countries-details';
+import { PokemonList } from './components/pokemons/pokemon-list/pokemon-list';
+import { PokemonDetail } from './components/pokemons/pokemon-detail/pokemon-detail';
 
 export const routes: Routes = [
     {
@@ -12,7 +13,11 @@ export const routes: Routes = [
     },
     {
         path: 'pays',
-        component: Pays
+        component: CountriesList
+    },
+    {
+        path: 'pays/:code',
+        component: CountryDetails
     },
     {
         path: 'pokemon',
@@ -21,6 +26,10 @@ export const routes: Routes = [
     {
         path: 'pokemons/:id',
         component: PokemonDetail
+    },
+    {
+        path: '**',
+        redirectTo: ''
     }
 ];
 

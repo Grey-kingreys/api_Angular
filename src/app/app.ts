@@ -2,7 +2,7 @@ import { Component, signal } from '@angular/core';
 import { Navbar } from './shared/navbar/navbar';
 import { Footer } from './shared/footer/footer';
 import { RouterModule } from '@angular/router';
-import { PokemonService } from './services/pokemon';
+import { PokemonService } from './services/pokemon.service';
 
 @Component({
   selector: 'app-root',

@@ -1,0 +1,151 @@
+<div class="min-h-screen bg-gray-50">
+    <!-- Loading -->
+    <div *ngIf="isLoadingCountry" class="flex justify-center items-center py-20">
+        <div class="animate-spin rounded-full h-16 w-16 border-b-2 border-blue-500"></div>
+    </div>
+
+    <!-- Erreur -->
+    <div *ngIf="errorMessage" class="container mx-auto p-6">
+        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+            {{ errorMessage }}
+        </div>
+        <button (click)="goBack()" class="text-blue-500 hover:underline">
+            ← Retour à la liste
+        </button>
+    </div>
+
+    <!-- Détail du pays -->
+    <div *ngIf="country && !isLoadingCountry" class="container mx-auto p-6">
+        <!-- Bouton retour -->
+        <button (click)="goBack()" class="mb-6 flex items-center text-blue-600 hover:text-blue-800 font-medium">
+            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
+            Retour à la liste
+        </button>
+
+        <!-- Header avec drapeau -->
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden mb-6">
+            <div class="h-64 overflow-hidden">
+                <img [src]="country.flags.svg" [alt]="country.name.common" class="w-full h-full object-cover" />
+            </div>
+            <div class="p-6">
+                <h1 class="text-4xl font-bold text-gray-800 mb-2">
+                    {{ country.name.common }}
+                </h1>
+                <p class="text-xl text-gray-600">{{ country.name.official }}</p>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <!-- Informations générales -->
+            <div class="lg:col-span-2 bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4">Informations générales</h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="border-l-4 border-blue-500 pl-4">
+                        <p class="text-sm text-gray-500">Capitale</p>
+                        <p class="text-lg font-semibold text-gray-800">
+                            {{ country.capital && country.capital[0] || 'Non renseignée' }}
+                        </p>
+                    </div>
+
+                    <div class="border-l-4 border-green-500 pl-4">
+                        <p class="text-sm text-gray-500">Région</p>
+                        <p class="text-lg font-semibold text-gray-800">{{ country.region }}</p>
+                    </div>
+
+                    <div class="border-l-4 border-purple-500 pl-4">
+                        <p class="text-sm text-gray-500">Population</p>
+                        <p class="text-lg font-semibold text-gray-800">
+                            {{ formatPopulation(country.population) }}
+                        </p>
+                    </div>
+
+                    <div class="border-l-4 border-orange-500 pl-4">
+                        <p class="text-sm text-gray-500">Superficie</p>
+                        <p class="text-lg font-semibold text-gray-800">
+                            {{ formatArea(country.area) }} km²
+                        </p>
+                    </div>
+
+                    <div class="border-l-4 border-red-500 pl-4" *ngIf="country.latlng">
+                        <p class="text-sm text-gray-500">Latitude</p>
+                        <p class="text-lg font-semibold text-gray-800">
+                            {{ country.latlng[0] }}°
+                        </p>
+                    </div>
+
+                    <div class="border-l-4 border-yellow-500 pl-4" *ngIf="country.latlng">
+                        <p class="text-sm text-gray-500">Longitude</p>
+                        <p class="text-lg font-semibold text-gray-800">
+                            {{ country.latlng[1] }}°
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Météo -->
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4">Météo actuelle</h2>
+
+                <!-- Loading météo -->
+                <div *ngIf="isLoadingWeather" class="flex justify-center py-8">
+                    <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500"></div>
+                </div>
+
+                <!-- Erreur météo -->
+                <div *ngIf="weatherError" class="text-red-500 text-sm">
+                    {{ weatherError }}
+                </div>
+
+                <!-- Données météo -->
+                <div *ngIf="weather && !isLoadingWeather" class="text-center">
+                    <div class="flex justify-center items-center mb-4">
+                        <img [src]="getWeatherIcon(weather.weather[0].icon)" [alt]="weather.weather[0].description"
+                            class="w-24 h-24" />
+                    </div>
+
+                    <p class="text-5xl font-bold text-gray-800 mb-2">
+                        {{ weather.main.temp.toFixed(1) }}°C
+                    </p>
+
+                    <p class="text-lg text-gray-600 capitalize mb-6">
+                        {{ weather.weather[0].description }}
+                    </p>
+
+                    <div class="grid grid-cols-2 gap-4 text-left">
+                        <div class="bg-gray-50 rounded-lg p-3">
+                            <p class="text-xs text-gray-500">Ressenti</p>
+                            <p class="text-lg font-semibold">
+                                {{ weather.main.feels_like.toFixed(1) }}°C
+                            </p>
+                        </div>
+
+                        <div class="bg-gray-50 rounded-lg p-3">
+                            <p class="text-xs text-gray-500">Humidité</p>
+                            <p class="text-lg font-semibold">{{ weather.main.humidity }}%</p>
+                        </div>
+
+                        <div class="bg-gray-50 rounded-lg p-3">
+                            <p class="text-xs text-gray-500">Vent</p>
+                            <p class="text-lg font-semibold">
+                                {{ weather.wind.speed.toFixed(1) }} m/s
+                            </p>
+                        </div>
+
+                        <div class="bg-gray-50 rounded-lg p-3">
+                            <p class="text-xs text-gray-500">Pression</p>
+                            <p class="text-lg font-semibold">{{ weather.main.pressure }} hPa</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pas de coordonnées -->
+                <div *ngIf="!country.latlng && !isLoadingWeather" class="text-gray-500 text-center py-8">
+                    Coordonnées non disponibles
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

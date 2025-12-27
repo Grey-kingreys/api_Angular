@@ -1,0 +1,175 @@
+<div class="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
+
+    <!-- Hero Section -->
+    <div class="relative overflow-hidden bg-gradient-to-r from-blue-600 to-purple-600 text-white">
+        <div class="absolute inset-0 bg-black opacity-10"></div>
+        <div class="container mx-auto px-6 py-20 relative z-10">
+            <div class="text-center">
+                <h1 class="text-5xl md:text-6xl font-bold mb-4 animate-fade-in">
+                    🌍 Explore le Monde
+                </h1>
+                <p class="text-xl md:text-2xl mb-8 text-blue-100">
+                    Découvrez les pays du monde et l'univers Pokémon
+                </p>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <a routerLink="/pays"
+                        class="bg-white text-blue-600 px-8 py-3 rounded-full font-semibold hover:bg-blue-50 transform hover:scale-105 transition-all shadow-lg">
+                        Explorer les Pays 🗺️
+                    </a>
+                    <a routerLink="/pokemon"
+                        class="bg-yellow-400 text-gray-900 px-8 py-3 rounded-full font-semibold hover:bg-yellow-300 transform hover:scale-105 transition-all shadow-lg">
+                        Voir les Pokémons ⚡
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Decorative waves -->
+        <div class="absolute bottom-0 left-0 right-0">
+            <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M0 120L60 105C120 90 240 60 360 45C480 30 600 30 720 37.5C840 45 960 60 1080 67.5C1200 75 1320 75 1380 75L1440 75V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z"
+                    fill="white" />
+            </svg>
+        </div>
+    </div>
+
+    <div class="container mx-auto px-6 py-12">
+
+        <!-- Quick Stats -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
+            <div *ngFor="let stat of quickStats"
+                class="bg-white rounded-xl shadow-lg p-6 text-center transform hover:scale-105 transition-all">
+                <div
+                    [class]="stat.color + ' w-16 h-16 rounded-full flex items-center justify-center text-3xl mx-auto mb-3'">
+                    {{ stat.icon }}
+                </div>
+                <p class="text-3xl font-bold text-gray-800">{{ stat.value }}</p>
+                <p class="text-gray-600 text-sm">{{ stat.label }}</p>
+            </div>
+        </div>
+
+        <!-- Main Features -->
+        <div class="grid md:grid-cols-2 gap-8 mb-12">
+            <div *ngFor="let feature of features" [routerLink]="feature.route"
+                class="group bg-white rounded-2xl shadow-xl overflow-hidden cursor-pointer transform hover:-translate-y-2 transition-all duration-300">
+                <div
+                    [class]="'bg-gradient-to-br from-' + feature.color + '-500 to-' + feature.color + '-600 p-8 text-white'">
+                    <div class="text-6xl mb-4">{{ feature.icon }}</div>
+                    <h3 class="text-2xl font-bold mb-2">{{ feature.title }}</h3>
+                    <p class="text-sm opacity-90 mb-4">{{ feature.description }}</p>
+                    <span class="inline-block bg-white bg-opacity-20 px-4 py-1 rounded-full text-sm">
+                        {{ feature.stats }}
+                    </span>
+                </div>
+                <div class="p-6 bg-gray-50">
+                    <button
+                        class="w-full bg-gray-800 text-white py-3 rounded-lg font-semibold group-hover:bg-gray-900 transition-all">
+                        Découvrir →
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Loading -->
+        <div *ngIf="isLoading" class="text-center py-12">
+            <div class="animate-spin rounded-full h-16 w-16 border-b-2 border-blue-500 mx-auto"></div>
+            <p class="text-gray-600 mt-4">Chargement des données...</p>
+        </div>
+
+        <!-- Preview Sections -->
+        <div *ngIf="!isLoading" class="grid md:grid-cols-2 gap-8">
+
+            <!-- Pays aléatoires -->
+            <div class="bg-white rounded-2xl shadow-xl p-6">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-2xl font-bold text-gray-800">🌍 Pays du jour</h2>
+                    <a routerLink="/pays" class="text-blue-600 hover:text-blue-800 text-sm font-semibold">
+                        Voir tout →
+                    </a>
+                </div>
+
+                <div class="space-y-4">
+                    <div *ngFor="let country of randomCountries" [routerLink]="['/pays', country.cca3]"
+                        class="flex items-center gap-4 p-4 bg-gray-50 rounded-xl hover:bg-blue-50 transition-all cursor-pointer group">
+                        <img [src]="country.flags.png" [alt]="country.name.common"
+                            class="w-16 h-12 object-cover rounded-lg shadow-md" />
+                        <div class="flex-1">
+                            <h3 class="font-semibold text-gray-800 group-hover:text-blue-600">
+                                {{ country.name.common }}
+                            </h3>
+                            <p class="text-sm text-gray-500">{{ country.region }}</p>
+                        </div>
+                        <svg class="w-5 h-5 text-gray-400 group-hover:text-blue-600" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pokémons aléatoires -->
+            <div class="bg-white rounded-2xl shadow-xl p-6">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-2xl font-bold text-gray-800">⚡ Pokémon du jour</h2>
+                    <a routerLink="/pokemon" class="text-red-600 hover:text-red-800 text-sm font-semibold">
+                        Voir tout →
+                    </a>
+                </div>
+
+                <div class="space-y-4">
+                    <div *ngFor="let pokemon of randomPokemons" [routerLink]="['/pokemon', getPokemonId(pokemon.url)]"
+                        class="flex items-center gap-4 p-4 bg-gray-50 rounded-xl hover:bg-yellow-50 transition-all cursor-pointer group">
+                        <div
+                            class="w-16 h-16 bg-gradient-to-br from-yellow-100 to-yellow-200 rounded-lg flex items-center justify-center shadow-md">
+                            <img [src]="getPokemonImage(pokemon.url)" [alt]="pokemon.name"
+                                class="w-14 h-14 object-contain" />
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="font-semibold text-gray-800 capitalize group-hover:text-red-600">
+                                {{ pokemon.name }}
+                            </h3>
+                            <p class="text-sm text-gray-500">#{{ getPokemonId(pokemon.url) }}</p>
+                        </div>
+                        <svg class="w-5 h-5 text-gray-400 group-hover:text-red-600" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Call to Action -->
+        <div
+            class="mt-12 bg-gradient-to-r from-purple-600 to-blue-600 rounded-2xl shadow-2xl p-8 md:p-12 text-white text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4">
+                Prêt à explorer ?
+            </h2>
+            <p class="text-lg mb-8 text-purple-100">
+                Plus de {{ totalCountries }} pays et {{ totalPokemons }} Pokémons vous attendent !
+            </p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a routerLink="/pays"
+                    class="bg-white text-purple-600 px-8 py-3 rounded-full font-semibold hover:bg-purple-50 transform hover:scale-105 transition-all">
+                    Commencer l'aventure 🚀
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-8 mt-20">
+        <div class="container mx-auto px-6 text-center">
+            <p class="text-gray-400">
+                Projet Angular - API REST | Développé par Souleymane
+            </p>
+            <p class="text-sm text-gray-500 mt-2">
+                Données : REST Countries API & PokéAPI | Météo : OpenWeatherMap
+            </p>
+        </div>
+    </footer>
+
+</div>

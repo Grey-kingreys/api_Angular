@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { PokemonService } from '../../services/pokemon';
-import { PokemonListItem } from '../../models/pokemon.model';
+import { PokemonService } from '../../../services/pokemon.service';
+import { PokemonListItem } from '../../../models/pokemon.model';
 
 @Component({
   selector: 'app-pokemon-list',
